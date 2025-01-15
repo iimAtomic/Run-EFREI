@@ -740,7 +740,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &29952708
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20406,7 +20406,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1160329985}
+  m_Father: {fileID: 688970705}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -24105,7 +24105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d64583807d7be64d9e163816387f8df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {fileID: 29952707}
+  Panel: {fileID: 29952707}
   playMenu: {fileID: 1289374604}
   gameOverMenu: {fileID: 1160329984}
 --- !u!1001 &1098580249
@@ -29044,7 +29044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d64583807d7be64d9e163816387f8df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {fileID: 0}
+  Panel: {fileID: 0}
   playMenu: {fileID: 1096486416}
   gameOverMenu: {fileID: 1096486416}
 --- !u!114 &1272369324
@@ -29697,7 +29697,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1289374605
 RectTransform:
   m_ObjectHideFlags: 0
@@ -48845,7 +48845,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1289374605}
+  m_Father: {fileID: 1272369322}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

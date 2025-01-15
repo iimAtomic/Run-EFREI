@@ -12,16 +12,29 @@ public class PlayerController : MonoBehaviour
     public float duration;
     public bool animCompleted = true;
 
+
+    public float jumpForce = 5f;    // Force du saut
+    public LayerMask groundLayer;  // Layer pour détecter le sol
+    public float runSpeed = 5f;    // Vitesse d'avancement vertical
+    public float moveSpeed = 5f;   // Vitesse de déplacement horizontal (gauche/droite)
+
+    private Rigidbody rb;
+    private bool isGrounded;
+
     // Start is called before the first frame update
     void Start()
     {
         // Set initial target position
         targetPosition = this.gameObject.transform.position;
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        isGrounded = CheckIfGrounded();
+        float horizontalInput = Input.GetAxis("Horizontal");
+            
         // Update target position to include forward movement
         targetPosition += transform.forward * initialPlayerSpeed * Time.deltaTime;
 
@@ -39,9 +52,16 @@ public class PlayerController : MonoBehaviour
             currentLane = 1;
             UpdateTargetPosition();
         }
+        // Appliquer le saut si au sol et touche "Espace" pressée
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            print("Jumping");
+            Jump();
+        }
         //this.transform.DOLocalMoveZ(targetPosition.z, duration);
         //this.transform.DOMove(this.transform.position + transform.forward * initialPlayerSpeed * Time.deltaTime, Time.deltaTime);
-
+        
+        rb.linearVelocity = new Vector3(horizontalInput * moveSpeed, rb.linearVelocity.y, runSpeed);
         this.transform.DOMove(targetPosition, duration).OnComplete(() =>
         {
             animCompleted = true;
@@ -61,6 +81,17 @@ public class PlayerController : MonoBehaviour
             animCompleted = true;
         });
         */
+    }
+
+    void Jump()
+    {
+        // Appliquer une force vers le haut pour faire sauter le personnage
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
+    }
+    bool CheckIfGrounded()
+    {
+        // Vérifie si le personnage touche le sol
+        return Physics.Raycast(transform.position, Vector3.down, 1.1f, groundLayer);
     }
 
 }
