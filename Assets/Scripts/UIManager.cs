@@ -6,7 +6,6 @@ public class UIManager : MonoBehaviour
     public GameObject Panel;          // Background partagé
     public GameObject playMenu;       // Menu principal
     public GameObject gameOverMenu;   // Menu Game Over
-
     public static bool isGameRestarting = false; // Variable statique pour savoir si c'est un redémarrage
 
     void Start()
@@ -33,9 +32,12 @@ public class UIManager : MonoBehaviour
 
     public void PlayGame()
     {
+        Debug.Log("Bouton 'Play' cliqué : le jeu commence.");
         Panel.SetActive(false);
         playMenu.SetActive(false); // Désactive le menu principal
         Time.timeScale = 1f;       // Reprend le jeu
+
+        
     }
 
     public void GameOver()
