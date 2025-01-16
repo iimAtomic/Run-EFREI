@@ -33,7 +33,7 @@ public class RotationTrigger : MonoBehaviour
             float rotationAngle = rotateLeft ? -90f : 90f;
 
             // Rotate the player
-            other.transform.Rotate(0, rotationAngle, 0);
+            other.transform.parent.Rotate(0, rotationAngle, 0);
 
             // Rotate the camera
             if (cameraTransform != null)
