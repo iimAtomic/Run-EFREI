@@ -6,17 +6,18 @@ public class PlayerController : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        // Si le personnage touche un objet avec le tag "Obstacle"
-        if (other.gameObject.CompareTag("Obstacle"))
+        // Vérifie si l'objet touché a le tag "Obstacle"
+        if (other.CompareTag("Obstacle"))
         {
-            GameOver();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
-    void GameOver()
+    void Die()
     {
-        // Recharge la scène pour simuler un écran de Game Over
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log("Le personnage est mort !");
+        // Exemple : Réinitialiser ou afficher un écran de Game Over
+        Destroy(gameObject); // Détruit le personnage
     }
 
 }

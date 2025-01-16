@@ -13,11 +13,13 @@ public class RunnerController : MonoBehaviour
     public GameObject playerVisual;
     public LayerMask groundLayer;
 
+    Animator animator;
+
 
     // Start is called before the first frame update
     void Start()
     {
-
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -26,17 +28,18 @@ public class RunnerController : MonoBehaviour
 
         ///Movement forward
         this.transform.position += this.transform.forward * (speed * Time.deltaTime);
+        animator.SetBool("isJumping", false);
 
         ///Lane switching
         if (lane == true)
         {
-            playerVisual.transform.position = this.transform.position + this.transform.right * laneSize;
+            playerVisual.transform.position = this.transform.position - this.transform.right * laneSize;
         }
         else
         {
-            playerVisual.transform.position = this.transform.position - this.transform.right * laneSize;
+            playerVisual.transform.position = this.transform.position + this.transform.right * laneSize;
         }
-
+        
         if (Input.GetKeyDown(KeyCode.A) && lane == false)
         {
             changeLane();
@@ -45,10 +48,11 @@ public class RunnerController : MonoBehaviour
         {
             changeLane();
         }
-        // Appliquer le saut si au sol et touche "Espace" pressée
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             jump();
+            animator.SetBool("isJumping", true);
         }
     }
     bool CheckIfGrounded()
