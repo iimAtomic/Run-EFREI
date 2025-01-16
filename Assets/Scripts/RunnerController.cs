@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class RunnerController : MonoBehaviour
 {
@@ -68,6 +69,46 @@ public class RunnerController : MonoBehaviour
     void jump()
     {
         rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        // Vérifie si l'objet touché a le tag "Obstacle"
+        if (other.CompareTag("Obstacle"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            // Vérifie si le joueur touche l'obstacle par le dessus
+            if (IsCollisionFromAbove(collision))
+            {
+                // La partie continue si le joueur saute sur l'obstacle
+                Debug.Log("Sauté sur un obstacle !");
+            }
+            else
+            {
+                // Si le joueur fonce dans l'obstacle, c'est Game Over
+                Debug.Log("Collision avec un obstacle de face !");
+            }
+        }
+    }
+
+    private bool IsCollisionFromAbove(Collision collision)
+    {
+        // Détecte si le contact principal est par le dessus
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            if (contact.normal.y > 0.2f) // La normale pointe vers le haut (contact par le dessus)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
