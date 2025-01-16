@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 8065215368775696789}
   - component: {fileID: 667585256268985464}
   - component: {fileID: 7921831423591195316}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Vehicle_Truck_color02
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

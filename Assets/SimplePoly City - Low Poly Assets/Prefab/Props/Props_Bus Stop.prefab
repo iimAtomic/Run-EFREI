@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 2300000}
   - component: {fileID: 6718658720769282020}
   - component: {fileID: 7187909196628502655}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Props_Bus Stop
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
