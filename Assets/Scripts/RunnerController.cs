@@ -16,6 +16,9 @@ public class RunnerController : MonoBehaviour
 
     Animator animator;
 
+    private int jumpCount = 0; // Tracks the number of jumps
+    private const int maxJumps = 2; // Maximum allowed jumps
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +33,7 @@ public class RunnerController : MonoBehaviour
         ///Movement forward
         this.transform.position += this.transform.forward * (speed * Time.deltaTime);
         animator.SetBool("isJumping", false);
+        
 
         ///Lane switching
         if (lane == true)
@@ -50,25 +54,23 @@ public class RunnerController : MonoBehaviour
             changeLane();
         }
         
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumps)
         {
+            print("log");
             jump();
             animator.SetBool("isJumping", true);
         }
     }
-    bool CheckIfGrounded()
-    {
-        // Vérifie si le personnage touche le sol
-        return Physics.Raycast(transform.position, Vector3.down, 1.1f, groundLayer);
-    }
+
 
     void changeLane()
     {
         lane = !lane;
     }
-    void jump()
+    void jump()  
     {
         rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        jumpCount++; // Increment the jump count
     }
 
     void OnTriggerEnter(Collider other)
@@ -76,7 +78,8 @@ public class RunnerController : MonoBehaviour
         // Vérifie si l'objet touché a le tag "Obstacle"
         if (other.CompareTag("Obstacle"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            FindFirstObjectByType<UIManager>().GameOver();
         }
     }
 
@@ -95,6 +98,10 @@ public class RunnerController : MonoBehaviour
                 // Si le joueur fonce dans l'obstacle, c'est Game Over
                 Debug.Log("Collision avec un obstacle de face !");
             }
+        }
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            jumpCount = 0; // Reset the jump count when grounded
         }
     }
 

@@ -40,6 +40,20 @@ public class UIManager : MonoBehaviour
         
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isGameRestarting = true; // Indique que le jeu est en cours de redémarrage
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Recharge la scène
+        }
+    }
+
+    public void OnQuitClicked()
+    {
+        Application.Quit();
+    }
+
     public void GameOver()
     {
         Panel.SetActive(true);
@@ -53,4 +67,6 @@ public class UIManager : MonoBehaviour
         isGameRestarting = true; // Indique que le jeu est en cours de redémarrage
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Recharge la scène
     }
+
+
 }
